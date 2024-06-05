@@ -1,0 +1,56 @@
+# Python
+*.py[cod]
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+.eggs/
+*.pyo
+*.pyd
+
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+local_settings.py
+db.sqlite3
+media
+staticfiles
+/static/
+/media/
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# VSCode
+.vscode/
+.history/
+
+# PyCharm
+.idea/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# JetBrains IDEs
+.idea/
+*.iml
+out/
