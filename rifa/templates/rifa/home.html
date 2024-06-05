@@ -7,7 +7,6 @@
 {% block content %}
 <h1 class="mt-5">Rifa A Beneficio</h1>
 
-
 <!-- Sección de Premio -->
 <h2 class="text-center">Premio</h2>
 <div class="container">
@@ -43,6 +42,26 @@
     </div>
 </div>
 
+<!-- Información de Transferencia -->
+<div class="container mt-4" style="margin-bottom: 2%;">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Datos para Transferencia</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-center"><strong>Andrea Goytiendia</strong></li>
+                        <li class="list-group-item text-center"><strong>RUT:</strong> 13707283-1</li>
+                        <li class="list-group-item text-center"><strong>Banco:</strong> Banco Estado</li>
+                        <li class="list-group-item text-center"><strong>Cuenta RUT:</strong> 13707283</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <style>
     .premio-img {
@@ -55,29 +74,26 @@
     }
 </style>
 
-
-
-    <!-- Lista de Tickets -->
-    <h1 class="text-center">Tickets (Valor $1000)</h1>
-    <div class="row justify-content-center" style="margin-top: 2%;"> <!-- Centrar la fila -->
-        {% for number in numbers %}
-        <div class="col-6 col-sm-4 col-md-2 col-lg-1 mb-3">
-            <a href="{% url 'add_ticket' number.number %}" class="text-decoration-none">
-                <div class="card {% if number.available %}bg-success{% else %}bg-warning{% endif %}"
-                    style="height: 75px; width: 75px;">
-                    <!-- Reducir el tamaño del card -->
-                    <div class="card-body text-center text-white" style="font-size: 25px;">
-                        <!-- Ajustar el tamaño del texto -->
-                        {{ number.number }}
-                    </div>
+<!-- Lista de Tickets -->
+<h1 class="text-center">Tickets (Valor $1000)</h1>
+<div class="row justify-content-center" style="margin-top: 2%;"> <!-- Centrar la fila -->
+    {% for number in numbers %}
+    <div class="col-6 col-sm-4 col-md-2 col-lg-1 mb-3">
+        <a href="{% url 'add_ticket' number.number %}" class="text-decoration-none">
+            <div class="card {% if number.available %}bg-success{% else %}bg-warning{% endif %}"
+                style="height: 75px; width: 75px;">
+                <!-- Reducir el tamaño del card -->
+                <div class="card-body text-center text-white" style="font-size: 25px;">
+                    <!-- Ajustar el tamaño del texto -->
+                    {{ number.number }}
                 </div>
-            </a>
-        </div>
-        {% if forloop.counter|divisibleby:10 %}
+            </div>
+        </a>
     </div>
-    <div class="row justify-content-center"> <!-- Centrar la nueva fila -->
-        {% endif %}
-        {% endfor %}
-    </div>
+    {% if forloop.counter|divisibleby:10 %}
+</div>
+<div class="row justify-content-center"> <!-- Centrar la nueva fila -->
+    {% endif %}
+    {% endfor %}
 </div>
 {% endblock %}
