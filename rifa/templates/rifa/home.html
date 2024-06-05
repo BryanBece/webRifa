@@ -1,0 +1,83 @@
+<!-- rifa/templates/rifa/home.html -->
+{% extends 'rifa/base.html' %}
+
+{% block title %}Inicio{% endblock %}
+{% load static %}
+
+{% block content %}
+<h1 class="mt-5">Rifa A Beneficio</h1>
+
+
+<!-- Sección de Premio -->
+<h2 class="text-center">Premio</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card">
+                <!-- Imagen del Vino -->
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">1 Vino Casillero del Diablo Reserva Privada <img
+                                src="{% static 'images/vino.jpg' %}" class="img-fluid premio-img" alt="Vino"> </li>
+                        <li class="list-group-item">
+                            1.6 kg Abastero
+                            <img src="{% static 'images/carne1.png' %}" class="img-fluid premio-img" alt="Carne">
+                            <!-- Imagen de Carne1 -->
+                        </li>
+                        <li class="list-group-item">
+                            1.5 kg Lomo Vetado
+                            <img src="{% static 'images/carne2.jpg' %}" class="img-fluid premio-img" alt="Carne">
+                            <!-- Imagen de Carne2 -->
+                        </li>
+                        <li class="list-group-item">
+                            3 kg Costillar Americano
+                            <img src="{% static 'images/carne3.png' %}" class="img-fluid premio-img" alt="Carne">
+                            <!-- Imagen de Carne3 -->
+                        </li>
+                        <li class="list-group-item">1 kg Longanizas <img src="{% static 'images/longanizas.png' %}" class="img-fluid premio-img" alt="Longas"></li>
+                        <li class="list-group-item">2.5 kg Carbón <img src="{% static 'images/carbon.png' %}" class="img-fluid premio-img" alt="Carbon"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .premio-img {
+        max-width: 75px;
+        /* Establece el tamaño máximo de las imágenes */
+        height: auto;
+        /* Mantiene la proporción de aspecto de las imágenes */
+        margin-left: 10px;
+        /* Añade un margen a la izquierda de las imágenes para separarlas del texto */
+    }
+</style>
+
+
+
+    <!-- Lista de Tickets -->
+    <h1 class="text-center">Tickets (Valor $1000)</h1>
+    <div class="row justify-content-center" style="margin-top: 2%;"> <!-- Centrar la fila -->
+        {% for number in numbers %}
+        <div class="col-6 col-sm-4 col-md-2 col-lg-1 mb-3">
+            <a href="{% url 'add_ticket' number.number %}" class="text-decoration-none">
+                <div class="card {% if number.available %}bg-success{% else %}bg-warning{% endif %}"
+                    style="height: 75px; width: 75px;">
+                    <!-- Reducir el tamaño del card -->
+                    <div class="card-body text-center text-white" style="font-size: 25px;">
+                        <!-- Ajustar el tamaño del texto -->
+                        {{ number.number }}
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% if forloop.counter|divisibleby:10 %}
+    </div>
+    <div class="row justify-content-center"> <!-- Centrar la nueva fila -->
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'rifa/base.html' %}
+
+{% block title %}Detalle del Ticket{% endblock %}
+
+{% block content %}
+<div class="card mt-5">
+    <div class="card-body">
+        <h1 class="card-title">Detalle del Ticket {{ ticket.numero }}</h1>
+        <p class="card-text"><strong>Nombre del Propietario:</strong> {{ ticket.nombre }}</p>
+        <p class="card-text"><strong>Teléfono del Propietario:</strong> {{ ticket.telefono }}</p>
+        <p class="card-text"><strong>Email del Propietario:</strong> {{ ticket.email }}</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Volver</a>
+    </div>
+</div>
+{% endblock %}

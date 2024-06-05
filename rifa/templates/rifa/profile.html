@@ -1,0 +1,91 @@
+<!-- rifa/templates/rifa/profile.html -->
+{% extends 'rifa/base.html' %}
+{% load static %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Mis Tickets Reservados</h1>
+    <table id="ticket-table" class="display">
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Acciones</th> <!-- Columna de acciones -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket.numero }}</td>
+                <td>{{ ticket.nombre }}</td>
+                <td>{{ ticket.telefono }}</td>
+                <td>{{ ticket.email }}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm delete-btn" data-ticket-id="{{ ticket.pk }}">Eliminar</button>
+                </td> <!-- Botón de eliminar -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#ticket-table').DataTable({
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
+            },
+            order: [[0, 'desc']] // Ordenar por el ID de forma descendente
+        });
+        // Captura el evento de clic en el botón de eliminar
+        $('.delete-btn').click(function() {
+            var ticketId = $(this).data('ticket-id');
+            // Muestra una alerta de confirmación utilizando SweetAlert2
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminarlo!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Envía una solicitud AJAX para eliminar el ticket
+                    $.ajax({
+                        url: '/delete-ticket/' + ticketId + '/',
+                        method: 'POST',
+                        data: {
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                        },
+                        success: function(response) {
+                            // Muestra una alerta de éxito
+                            Swal.fire({
+                                title: '¡Eliminado!',
+                                text: 'El ticket ha sido eliminado.',
+                                icon: 'success'
+                            }).then((result) => {
+                                // Recarga la página después de eliminar el ticket
+                                location.reload();
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

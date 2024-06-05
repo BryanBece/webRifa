@@ -1,0 +1,22 @@
+{% extends 'rifa/base.html' %}
+
+{% block title %}Reservar Ticket{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5 d-flex justify-content-center align-items-center"> <!-- Centrar horizontal y verticalmente -->
+    <div class="card" style="max-width: 400px;"> <!-- Reducir el ancho máximo del card -->
+        <div class="card-header">
+            <h1 class="card-title">Reservar Ticket {{ numero }}</h1>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Reservar</button>
+                <a href="{% url 'home' %}" class="btn btn-secondary">Volver</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
