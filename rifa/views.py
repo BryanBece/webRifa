@@ -18,7 +18,7 @@ def ticket_detail(request, ticket_id):
 
 def add_ticket(request, numero):
     if Ticket.objects.filter(numero=numero).exists():
-        messages.error(request, '¡El ticket ya esta reservado!')
+        messages.error(request, '¡El ticket ya está reservado!')
         return redirect('home')
 
     if request.method == 'POST':
