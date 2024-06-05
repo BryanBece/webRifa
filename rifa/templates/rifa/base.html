@@ -1,4 +1,3 @@
-<!-- rifa/templates/rifa/base.html -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,23 +9,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- SweetAlert -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7/dist/sweetalert2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     {% load static %}
-</head>
-<style>
-    .card-body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-    }
+    {% block extra_css %}{% endblock %}
+    <style>
+        .card-body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
 
-    body {
-        font-family: 'Roboto', sans-serif;
-        /* Cambiar la fuente a Roboto */
-    }
-</style>
-{% block extra_css %}{% endblock %}
+        body {
+            font-family: 'Roboto', sans-serif;
+            /* Cambiar la fuente a Roboto */
+        }
+    </style>
 </head>
 
 <body>
@@ -78,9 +77,8 @@
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+6p0tzzq+3e7sl9pS0ICp9eBLsX4P" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybVu3H4k5/5vllYDUiGJoknt7Q2eI1XrK/4umE8mMei5aVg7X" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93NCjfjZK5D9HR2z0bbxpY6l/wEfx9I1JYuDVIBgk7AjJ6n/z03NJzN0Jsl1v+" crossorigin="anonymous"></script>
     {% block extra_js %}{% endblock %}
 </body>
 
