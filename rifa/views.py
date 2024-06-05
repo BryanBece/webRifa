@@ -4,6 +4,7 @@ from .models import Ticket
 from .forms import TicketForm
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 def home(request):
     total_numbers = 100
@@ -49,3 +50,12 @@ def profile(request):
 def logout(request):
     auth.logout(request)
     return redirect("home")
+
+
+def update_ticket(request, ticket_id):
+    if request.method == 'POST':
+        ticket = get_object_or_404(Ticket, pk=ticket_id)
+        ticket.pagado = not ticket.pagado
+        ticket.save()
+        return JsonResponse({'status': 'success', 'pagado': ticket.pagado})
+    return JsonResponse({'status': 'error'}, status=400)
