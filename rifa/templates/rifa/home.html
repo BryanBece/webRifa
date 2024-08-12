@@ -35,17 +35,47 @@
                     <h3 class="text-center">Datos para Transferencia</h3>
                 </div>
                 <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-center"><strong>Andrea Goytiendia</strong></li>
+                    <ul id="transferData" class="list-group list-group-flush">
+                        <li class="list-group-item text-center"><strong>Nombre: Andrea Goytiendia</strong></li>
                         <li class="list-group-item text-center"><strong>RUT:</strong> 13707283-1</li>
                         <li class="list-group-item text-center"><strong>Banco:</strong> Banco Estado</li>
                         <li class="list-group-item text-center"><strong>Cuenta RUT:</strong> 13707283</li>
                     </ul>
                 </div>
+                <div class="card-footer text-center">
+                    <button id="copyButton" class="btn btn-primary">Copiar Datos</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+    document.getElementById('copyButton').addEventListener('click', function() {
+    // Selecciona el contenedor de datos de transferencia
+    var transferData = document.getElementById('transferData');
+
+    // Crea un elemento temporal para copiar
+    var tempElement = document.createElement('textarea');
+    tempElement.value = transferData.innerText;
+
+    // Añade el elemento temporal al documento
+    document.body.appendChild(tempElement);
+
+    // Selecciona y copia el contenido del textarea
+    tempElement.select();
+    document.execCommand('copy');
+
+    // Elimina el elemento temporal
+    document.body.removeChild(tempElement);
+
+    // Opcional: Cambia el texto del botón para indicar que se copiaron los datos
+    this.innerText = "Datos Copiados!";
+    setTimeout(() => { this.innerText = "Copiar Datos"; }, 2000);
+});
+
+</script>
 
 <style>
     .premio-img {
