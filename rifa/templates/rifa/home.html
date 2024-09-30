@@ -6,28 +6,63 @@
 
 {% block content %}
 <h1 class="mt-5">Rifa A Beneficio Familia Paredes</h1>
-<h2 class="mt-5">Fecha Sorteo: 31-08-2024</h2>
+<h2 class="mt-5">Fecha Sorteo: 15-10-2024</h2>
 
 <!-- Sección de Premio -->
 <h2 class="text-center">Premio</h2>
 <div class="container">
     <div class="row">
         <div class="col-md-12 mb-3">
-            <div class="card">
-                <!-- Imagen del Olla -->
+            <div class="card text-center">
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Olla Multifuncional<img
-                                src="{% static 'images/Olla.jpg' %}" class="img-fluid premio-img" alt="Vino"> </li>
+                        <li class="list-group-item">
+                            Alexa (Amazon Alexa 5ta Generación)
+                            <br>
+                            <img src="{% static 'images/Alexa.webp' %}" class="img-fluid premio-img" alt="Alexa">
+                        </li>
                     </ul>
+                    <!-- Botón para abrir el modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alexaModal">
+                        ¿Qué es Alexa?
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="alexaModal" tabindex="-1" aria-labelledby="alexaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alexaModalLabel">¿Qué es Alexa?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Amazon Alexa</strong> es un asistente virtual controlado por voz, desarrollado por Amazon. Puedes usar Alexa para realizar una amplia gama de tareas mediante comandos de voz.</p>
+                <p>Con Alexa puedes:</p>
+                <ul>
+                    <li>Controlar dispositivos inteligentes en tu hogar, como luces, termostatos, y cámaras de seguridad.</li>
+                    <li>Reproducir música desde servicios como Spotify, Amazon Music, Apple Music, y más.</li>
+                    <li>Hacer preguntas sobre el clima, noticias, deportes, y curiosidades generales.</li>
+                    <li>Configurar alarmas, recordatorios y temporizadores.</li>
+                    <li>Realizar compras en Amazon o añadir productos a tu lista de compras.</li>
+                    <li>Hacer llamadas telefónicas o enviar mensajes.</li>
+                    <li>Jugar juegos interactivos o participar en trivias.</li>
+                </ul>
+                <p>¡Alexa se convierte en un centro de control para tu hogar y puede ayudarte a simplificar muchas tareas diarias!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Información de Transferencia -->
-<div class="container mt-4" style="margin-bottom: 2%;">
+<div class="container mt-4" style="margin-bottom: 5%;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -50,56 +85,45 @@
     </div>
 </div>
 
-
 <script>
     document.getElementById('copyButton').addEventListener('click', function() {
-    // Selecciona el contenedor de datos de transferencia
-    var transferData = document.getElementById('transferData');
-
-    // Crea un elemento temporal para copiar
-    var tempElement = document.createElement('textarea');
-    tempElement.value = transferData.innerText;
-
-    // Añade el elemento temporal al documento
-    document.body.appendChild(tempElement);
-
-    // Selecciona y copia el contenido del textarea
-    tempElement.select();
-    document.execCommand('copy');
-
-    // Elimina el elemento temporal
-    document.body.removeChild(tempElement);
-
-    // Opcional: Cambia el texto del botón para indicar que se copiaron los datos
-    this.innerText = "Datos Copiados!";
-    setTimeout(() => { this.innerText = "Copiar Datos"; }, 2000);
-});
-
+        var transferData = document.getElementById('transferData');
+        var tempElement = document.createElement('textarea');
+        tempElement.value = transferData.innerText;
+        document.body.appendChild(tempElement);
+        tempElement.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempElement);
+        this.innerText = "Datos Copiados!";
+        setTimeout(() => { this.innerText = "Copiar Datos"; }, 2000);
+    });
 </script>
 
 <style>
     .premio-img {
         max-width: 200px;
-        /* Establece el tamaño máximo de las imágenes */
         height: auto;
-        /* Mantiene la proporción de aspecto de las imágenes */
         margin-left: 10px;
-        /* Añade un margen a la izquierda de las imágenes para separarlas del texto */
+        margin-top: 10px;
+    }
+
+    .btn-sm {
+        font-size: 20px;
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
     }
 </style>
 
 <!-- Lista de Tickets -->
 <h1 class="text-center">Tickets (Valor $1000)</h1>
-<div class="row justify-content-center" style="margin-top: 2%;">
-    <!-- Centrar la fila -->
+<h4 class="text-center">(Verdes Disponibles)</h4>
+<div class="row justify-content-center" style="margin-top: 5%;">
     {% for number in numbers %}
     <div class="col-6 col-sm-4 col-md-2 col-lg-1 mb-3">
         <a href="{% url 'add_ticket' number.number %}" class="text-decoration-none">
-            <div class="card {% if number.available %}bg-success{% else %}bg-warning{% endif %}"
-                style="height: 75px; width: 75px;">
-                <!-- Reducir el tamaño del card -->
+            <div class="card {% if number.available %}bg-success{% else %}bg-danger{% endif %}" style="height: 75px; width: 75px;">
                 <div class="card-body text-center text-white" style="font-size: 25px;">
-                    <!-- Ajustar el tamaño del texto -->
                     {{ number.number }}
                 </div>
             </div>
@@ -108,7 +132,6 @@
     {% if forloop.counter|divisibleby:10 %}
 </div>
 <div class="row justify-content-center">
-    <!-- Centrar la nueva fila -->
     {% endif %}
     {% endfor %}
 </div>
