@@ -1,0 +1,40 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Listado de Tickets</title>
+  <style>
+    /* xhtml2pdf soporta CSS básico; evita cosas muy avanzadas */
+    @page { size: A4; margin: 20mm; }
+    body { font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; }
+    h1 { margin: 0 0 10px 0; font-size: 18px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #999; padding: 6px; text-align: left; }
+    th { background: #eee; }
+  </style>
+</head>
+<body>
+  <h1>Listado de Tickets</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in tickets %}
+      <tr>
+        <td>{{ t.numero }}</td>
+        <td>{{ t.nombre }}</td>
+        <td>{{ t.telefono }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">No hay tickets.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

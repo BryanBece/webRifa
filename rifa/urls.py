@@ -12,5 +12,6 @@ urlpatterns = [
     path('delete-ticket/<int:ticket_id>/', views.delete_ticket, name='delete_ticket'),
     path('login/', LoginView.as_view(template_name='rifa/registration/login.html', redirect_authenticated_user=True), name='login'),
     path('profile/', views.profile, name='profile'),
+    path('tickets/pdf/', views.tickets_pdf, name='tickets_pdf'),
     path('logout/', logout, name='logout'),
 ]

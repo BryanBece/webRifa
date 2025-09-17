@@ -5,6 +5,9 @@ from .forms import TicketForm
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 def home(request):
     total_numbers = 125
@@ -59,3 +62,23 @@ def update_ticket(request, ticket_id):
         ticket.save()
         return JsonResponse({'status': 'success', 'pagado': ticket.pagado})
     return JsonResponse({'status': 'error'}, status=400)
+
+def tickets_pdf(request):
+    # Trae TODOS los registros (sin paginar ni cortar)
+    tickets = Ticket.objects.order_by('numero')
+
+    # Renderiza el HTML de la plantilla de PDF
+    template = get_template('rifa/tickets_pdf.html')
+    html = template.render({'tickets': tickets})
+
+    # Prepara la respuesta como PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="tickets.pdf"'
+
+    # Genera el PDF
+    pisa_status = pisa.CreatePDF(html, dest=response, encoding='utf-8')
+
+    if pisa_status.err:
+        return HttpResponse('Error al generar el PDF.', status=500)
+
+    return response

@@ -11,7 +11,7 @@
 {% block content %}
 <div class="container mt-5">
     <h1>Mis Tickets Reservados</h1>
-    <button id="export-pdf" class="btn btn-primary mb-3">Exportar a PDF</button>
+    <a class="btn btn-sm btn-secondary" href="{% url 'tickets_pdf' %}">Exportar a PDF</a>
     <table id="ticket-table" class="display">
         <thead>
             <tr>
