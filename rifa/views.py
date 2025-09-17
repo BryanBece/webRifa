@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
 def home(request):
-    total_numbers = 120
+    total_numbers = 125
     tickets = Ticket.objects.all()
     taken_numbers = {ticket.numero for ticket in tickets}
     numbers = [{'number': i, 'available': i not in taken_numbers} for i in range(1, total_numbers + 1)]
